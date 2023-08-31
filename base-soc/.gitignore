@@ -1,0 +1,14 @@
+# Ignore cache directory
+base-soc.cache
+
+# Ignore ip_user_files
+base-soc.ip_user_files
+
+# Ignore simulation files
+base-soc.sim
+
+# Ignore synthesis & implementation runs
+base-soc.runs
+
+# Ignore SDK metadata
+base-soc.sdk/.metadata
