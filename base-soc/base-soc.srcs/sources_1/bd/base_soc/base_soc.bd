@@ -24,6 +24,12 @@
       "microblaze_0_axi_mem": "",
       "microblaze_0_axi_periph": ""
     },
+    "interface_ports": {
+      "ddr3_sdram": {
+        "mode": "Master",
+        "vlnv": "xilinx.com:interface:ddrx_rtl:1.0"
+      }
+    },
     "ports": {
       "reset": {
         "type": "rst",
@@ -53,7 +59,7 @@
         "xci_name": "base_soc_mig_7series_0_0",
         "parameters": {
           "BOARD_MIG_PARAM": {
-            "value": "Custom"
+            "value": "ddr3_sdram"
           },
           "MIG_DONT_TOUCH_PARAM": {
             "value": "Custom"
@@ -62,7 +68,7 @@
             "value": "reset"
           },
           "XML_INPUT_FILE": {
-            "value": "mig_a.prj"
+            "value": "board.prj"
           }
         }
       },
@@ -351,6 +357,12 @@
         "interface_ports": [
           "mdm_1/MBDEBUG_0",
           "microblaze_0/DEBUG"
+        ]
+      },
+      "mig_7series_0_DDR3": {
+        "interface_ports": [
+          "ddr3_sdram",
+          "mig_7series_0/DDR3"
         ]
       },
       "microblaze_0_axi_mem_M00_AXI": {
