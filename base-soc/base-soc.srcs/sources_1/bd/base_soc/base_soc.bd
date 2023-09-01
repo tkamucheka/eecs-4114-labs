@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x0",
+      "boundary_crc": "0x49AECD0372C10D87",
       "device": "xc7a35ticsg324-1L",
       "name": "base_soc",
       "synth_flow_mode": "Hierarchical",
@@ -139,6 +139,16 @@
           "C_I_LMB": {
             "value": "1"
           }
+        },
+        "hdl_attributes": {
+          "BMM_INFO_PROCESSOR": {
+            "value": "microblaze-le > base_soc microblaze_0_local_memory/dlmb_bram_if_cntlr",
+            "value_src": "default"
+          },
+          "KEEP_HIERARCHY": {
+            "value": "yes",
+            "value_src": "default"
+          }
         }
       },
       "microblaze_0_local_memory": {
@@ -177,6 +187,16 @@
             "parameters": {
               "C_ECC": {
                 "value": "0"
+              }
+            },
+            "hdl_attributes": {
+              "BMM_INFO_ADDRESS_SPACE": {
+                "value": "byte  0x00000000 32 > base_soc microblaze_0_local_memory/lmb_bram",
+                "value_src": "default"
+              },
+              "KEEP_HIERARCHY": {
+                "value": "yes",
+                "value_src": "default"
               }
             }
           },

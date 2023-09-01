@@ -1,2 +1,2 @@
 # Clocking routes
-# set_property CLOCK_DEDICATED_ROUTE true [get_nets */clk_out2]
+set_property CLOCK_DEDICATED_ROUTE true [get_nets base_soc_i/clk_wiz_0/inst/clk_out2]
