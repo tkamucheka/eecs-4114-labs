@@ -54,8 +54,8 @@
     <ECC>Disabled</ECC>
     <Ordering>Normal</Ordering>
     <BankMachineCnt>4</BankMachineCnt>
-    <CustomPart>FALSE</CustomPart>
-    <NewPartName></NewPartName>
+    <CustomPart>TRUE</CustomPart>
+    <NewPartName>MT41K128M16XX-125</NewPartName>
     <RowAddress>14</RowAddress>
     <ColAddress>10</ColAddress>
     <BankAddress>3</BankAddress>
@@ -113,7 +113,7 @@
       <Pin IN_TERM="" IOSTANDARD="SSTL135" PADName="P5" SLEW="" VCCAUX_IO="" name="ddr3_we_n"/>
     </PinSelection>
     <System_Clock>
-      <Pin Bank="35" PADName="E2(SRCC_P)" name="sys_clk_i"/>
+      <Pin Bank="35" PADName="E3(MRCC_P)" name="sys_clk_i"/>
     </System_Clock>
     <System_Control>
       <Pin Bank="Select Bank" PADName="No connect" name="sys_rst"/>
@@ -147,7 +147,7 @@
     <AXIParameters>
       <C0_C_RD_WR_ARB_ALGORITHM>RD_PRI_REG</C0_C_RD_WR_ARB_ALGORITHM>
       <C0_S_AXI_ADDR_WIDTH>28</C0_S_AXI_ADDR_WIDTH>
-      <C0_S_AXI_DATA_WIDTH>128</C0_S_AXI_DATA_WIDTH>
+      <C0_S_AXI_DATA_WIDTH>32</C0_S_AXI_DATA_WIDTH>
       <C0_S_AXI_ID_WIDTH>4</C0_S_AXI_ID_WIDTH>
       <C0_S_AXI_SUPPORTS_NARROW_BURST>0</C0_S_AXI_SUPPORTS_NARROW_BURST>
     </AXIParameters>

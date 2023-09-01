@@ -130,7 +130,7 @@ module sim_tb_top;
    // The following parameters are multiplier and divisor factors for PLLE2.
    // Based on the selected design frequency these parameters vary.
    //***************************************************************************
-   parameter CLKIN_PERIOD          = 10000;
+   parameter CLKIN_PERIOD          = 6000;
                                      // Input Clock Period
 
 
@@ -164,7 +164,7 @@ module sim_tb_top;
    //***************************************************************************
    // System clock frequency parameters
    //***************************************************************************
-   parameter tCK                   = 3077;
+   parameter tCK                   = 3000;
                                      // memory tCK paramter.
                      // # = Clock Period in pS.
    parameter nCK_PER_CLK           = 4;
@@ -181,7 +181,7 @@ module sim_tb_top;
                                              // Width of S_AXI_AWADDR, S_AXI_ARADDR, M_AXI_AWADDR and
                                              // M_AXI_ARADDR for all SI/MI slots.
                                              // # = 32.
-   parameter C_S_AXI_DATA_WIDTH            = 128;
+   parameter C_S_AXI_DATA_WIDTH            = 32;
                                              // Width of WDATA and RDATA on SI slot.
                                              // Must be <= APP_DATA_WIDTH.
                                              // # = 32, 64, 128, 256.
