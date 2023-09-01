@@ -8,17 +8,17 @@
       "tool_version": "2019.1"
     },
     "design_tree": {
-      "mig_7series_0": "",
-      "clk_wiz_0": "",
-      "microblaze_0": "",
       "microblaze_0_local_memory": {
-        "dlmb_v10": "",
-        "ilmb_v10": "",
         "dlmb_bram_if_cntlr": "",
+        "dlmb_v10": "",
         "ilmb_bram_if_cntlr": "",
+        "ilmb_v10": "",
         "lmb_bram": ""
       },
       "mdm_1": "",
+      "clk_wiz_0": "",
+      "microblaze_0": "",
+      "mig_7series_0": "",
       "rst_mig_7series_0_83M": "",
       "microblaze_0_smartconnect": "",
       "microblaze_0_axi_mem": "",
@@ -54,23 +54,154 @@
       }
     },
     "components": {
-      "mig_7series_0": {
-        "vlnv": "xilinx.com:ip:mig_7series:4.2",
-        "xci_name": "base_soc_mig_7series_0_0",
-        "parameters": {
-          "BOARD_MIG_PARAM": {
-            "value": "ddr3_sdram"
+      "microblaze_0_local_memory": {
+        "interface_ports": {
+          "DLMB": {
+            "mode": "MirroredMaster",
+            "vlnv": "xilinx.com:interface:lmb_rtl:1.0"
           },
-          "MIG_DONT_TOUCH_PARAM": {
-            "value": "Custom"
+          "ILMB": {
+            "mode": "MirroredMaster",
+            "vlnv": "xilinx.com:interface:lmb_rtl:1.0"
+          }
+        },
+        "ports": {
+          "LMB_Clk": {
+            "type": "clk",
+            "direction": "I"
           },
-          "RESET_BOARD_INTERFACE": {
-            "value": "reset"
+          "SYS_Rst": {
+            "type": "rst",
+            "direction": "I"
+          }
+        },
+        "components": {
+          "dlmb_bram_if_cntlr": {
+            "vlnv": "xilinx.com:ip:lmb_bram_if_cntlr:4.0",
+            "xci_name": "base_soc_dlmb_bram_if_cntlr_0",
+            "parameters": {
+              "C_ECC": {
+                "value": "0"
+              }
+            },
+            "hdl_attributes": {
+              "BMM_INFO_ADDRESS_SPACE": {
+                "value": "byte  0x00000000 32 > base_soc microblaze_0_local_memory/lmb_bram",
+                "value_src": "default"
+              },
+              "KEEP_HIERARCHY": {
+                "value": "yes",
+                "value_src": "default"
+              }
+            }
           },
-          "XML_INPUT_FILE": {
-            "value": "board.prj"
+          "dlmb_v10": {
+            "vlnv": "xilinx.com:ip:lmb_v10:3.0",
+            "xci_name": "base_soc_dlmb_v10_0"
+          },
+          "ilmb_bram_if_cntlr": {
+            "vlnv": "xilinx.com:ip:lmb_bram_if_cntlr:4.0",
+            "xci_name": "base_soc_ilmb_bram_if_cntlr_0",
+            "parameters": {
+              "C_ECC": {
+                "value": "0"
+              }
+            }
+          },
+          "ilmb_v10": {
+            "vlnv": "xilinx.com:ip:lmb_v10:3.0",
+            "xci_name": "base_soc_ilmb_v10_0"
+          },
+          "lmb_bram": {
+            "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
+            "xci_name": "base_soc_lmb_bram_0",
+            "parameters": {
+              "Enable_B": {
+                "value": "Use_ENB_Pin"
+              },
+              "Memory_Type": {
+                "value": "True_Dual_Port_RAM"
+              },
+              "Port_B_Clock": {
+                "value": "100"
+              },
+              "Port_B_Enable_Rate": {
+                "value": "100"
+              },
+              "Port_B_Write_Rate": {
+                "value": "50"
+              },
+              "Use_RSTB_Pin": {
+                "value": "true"
+              },
+              "use_bram_block": {
+                "value": "BRAM_Controller"
+              }
+            }
+          }
+        },
+        "interface_nets": {
+          "microblaze_0_dlmb_bus": {
+            "interface_ports": [
+              "dlmb_v10/LMB_Sl_0",
+              "dlmb_bram_if_cntlr/SLMB"
+            ]
+          },
+          "microblaze_0_ilmb_bus": {
+            "interface_ports": [
+              "ilmb_v10/LMB_Sl_0",
+              "ilmb_bram_if_cntlr/SLMB"
+            ]
+          },
+          "microblaze_0_ilmb_cntlr": {
+            "interface_ports": [
+              "ilmb_bram_if_cntlr/BRAM_PORT",
+              "lmb_bram/BRAM_PORTB"
+            ]
+          },
+          "microblaze_0_dlmb_cntlr": {
+            "interface_ports": [
+              "dlmb_bram_if_cntlr/BRAM_PORT",
+              "lmb_bram/BRAM_PORTA"
+            ]
+          },
+          "microblaze_0_dlmb": {
+            "interface_ports": [
+              "DLMB",
+              "dlmb_v10/LMB_M"
+            ]
+          },
+          "microblaze_0_ilmb": {
+            "interface_ports": [
+              "ILMB",
+              "ilmb_v10/LMB_M"
+            ]
+          }
+        },
+        "nets": {
+          "microblaze_0_Clk": {
+            "ports": [
+              "LMB_Clk",
+              "dlmb_bram_if_cntlr/LMB_Clk",
+              "dlmb_v10/LMB_Clk",
+              "ilmb_bram_if_cntlr/LMB_Clk",
+              "ilmb_v10/LMB_Clk"
+            ]
+          },
+          "SYS_Rst_1": {
+            "ports": [
+              "SYS_Rst",
+              "dlmb_bram_if_cntlr/LMB_Rst",
+              "dlmb_v10/SYS_Rst",
+              "ilmb_bram_if_cntlr/LMB_Rst",
+              "ilmb_v10/SYS_Rst"
+            ]
           }
         }
+      },
+      "mdm_1": {
+        "vlnv": "xilinx.com:ip:mdm:3.2",
+        "xci_name": "base_soc_mdm_1_0"
       },
       "clk_wiz_0": {
         "vlnv": "xilinx.com:ip:clk_wiz:6.0",
@@ -151,144 +282,31 @@
           }
         }
       },
-      "microblaze_0_local_memory": {
-        "interface_ports": {
-          "DLMB": {
-            "mode": "MirroredMaster",
-            "vlnv": "xilinx.com:interface:lmb_rtl:1.0"
+      "mig_7series_0": {
+        "vlnv": "xilinx.com:ip:mig_7series:4.2",
+        "xci_name": "base_soc_mig_7series_0_0",
+        "parameters": {
+          "BOARD_MIG_PARAM": {
+            "value": "ddr3_sdram"
           },
-          "ILMB": {
-            "mode": "MirroredMaster",
-            "vlnv": "xilinx.com:interface:lmb_rtl:1.0"
-          }
-        },
-        "ports": {
-          "LMB_Clk": {
-            "type": "clk",
-            "direction": "I"
+          "MIG_DONT_TOUCH_PARAM": {
+            "value": "Custom"
           },
-          "SYS_Rst": {
-            "type": "rst",
-            "direction": "I"
-          }
-        },
-        "components": {
-          "dlmb_v10": {
-            "vlnv": "xilinx.com:ip:lmb_v10:3.0",
-            "xci_name": "base_soc_dlmb_v10_0"
+          "RESET_BOARD_INTERFACE": {
+            "value": "reset"
           },
-          "ilmb_v10": {
-            "vlnv": "xilinx.com:ip:lmb_v10:3.0",
-            "xci_name": "base_soc_ilmb_v10_0"
-          },
-          "dlmb_bram_if_cntlr": {
-            "vlnv": "xilinx.com:ip:lmb_bram_if_cntlr:4.0",
-            "xci_name": "base_soc_dlmb_bram_if_cntlr_0",
-            "parameters": {
-              "C_ECC": {
-                "value": "0"
-              }
-            },
-            "hdl_attributes": {
-              "BMM_INFO_ADDRESS_SPACE": {
-                "value": "byte  0x00000000 32 > base_soc microblaze_0_local_memory/lmb_bram",
-                "value_src": "default"
-              },
-              "KEEP_HIERARCHY": {
-                "value": "yes",
-                "value_src": "default"
-              }
-            }
-          },
-          "ilmb_bram_if_cntlr": {
-            "vlnv": "xilinx.com:ip:lmb_bram_if_cntlr:4.0",
-            "xci_name": "base_soc_ilmb_bram_if_cntlr_0",
-            "parameters": {
-              "C_ECC": {
-                "value": "0"
-              }
-            }
-          },
-          "lmb_bram": {
-            "vlnv": "xilinx.com:ip:blk_mem_gen:8.4",
-            "xci_name": "base_soc_lmb_bram_0",
-            "parameters": {
-              "Memory_Type": {
-                "value": "True_Dual_Port_RAM"
-              },
-              "use_bram_block": {
-                "value": "BRAM_Controller"
-              }
-            }
-          }
-        },
-        "interface_nets": {
-          "microblaze_0_dlmb_cntlr": {
-            "interface_ports": [
-              "dlmb_bram_if_cntlr/BRAM_PORT",
-              "lmb_bram/BRAM_PORTA"
-            ]
-          },
-          "microblaze_0_ilmb": {
-            "interface_ports": [
-              "ILMB",
-              "ilmb_v10/LMB_M"
-            ]
-          },
-          "microblaze_0_ilmb_cntlr": {
-            "interface_ports": [
-              "ilmb_bram_if_cntlr/BRAM_PORT",
-              "lmb_bram/BRAM_PORTB"
-            ]
-          },
-          "microblaze_0_dlmb": {
-            "interface_ports": [
-              "DLMB",
-              "dlmb_v10/LMB_M"
-            ]
-          },
-          "microblaze_0_ilmb_bus": {
-            "interface_ports": [
-              "ilmb_v10/LMB_Sl_0",
-              "ilmb_bram_if_cntlr/SLMB"
-            ]
-          },
-          "microblaze_0_dlmb_bus": {
-            "interface_ports": [
-              "dlmb_v10/LMB_Sl_0",
-              "dlmb_bram_if_cntlr/SLMB"
-            ]
-          }
-        },
-        "nets": {
-          "microblaze_0_Clk": {
-            "ports": [
-              "LMB_Clk",
-              "dlmb_v10/LMB_Clk",
-              "dlmb_bram_if_cntlr/LMB_Clk",
-              "ilmb_v10/LMB_Clk",
-              "ilmb_bram_if_cntlr/LMB_Clk"
-            ]
-          },
-          "SYS_Rst_1": {
-            "ports": [
-              "SYS_Rst",
-              "dlmb_v10/SYS_Rst",
-              "dlmb_bram_if_cntlr/LMB_Rst",
-              "ilmb_v10/SYS_Rst",
-              "ilmb_bram_if_cntlr/LMB_Rst"
-            ]
+          "XML_INPUT_FILE": {
+            "value": "board.prj"
           }
         }
-      },
-      "mdm_1": {
-        "vlnv": "xilinx.com:ip:mdm:3.2",
-        "xci_name": "base_soc_mdm_1_0"
       },
       "rst_mig_7series_0_83M": {
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "xci_name": "base_soc_rst_mig_7series_0_83M_0",
         "parameters": {
+          "C_EXT_RESET_HIGH": {
+            "value": "0"
+          },
           "RESET_BOARD_INTERFACE": {
             "value": "reset"
           },
@@ -373,34 +391,10 @@
       }
     },
     "interface_nets": {
-      "microblaze_0_debug": {
-        "interface_ports": [
-          "mdm_1/MBDEBUG_0",
-          "microblaze_0/DEBUG"
-        ]
-      },
       "mig_7series_0_DDR3": {
         "interface_ports": [
           "ddr3_sdram",
           "mig_7series_0/DDR3"
-        ]
-      },
-      "microblaze_0_axi_mem_M00_AXI": {
-        "interface_ports": [
-          "microblaze_0_axi_mem/M00_AXI",
-          "mig_7series_0/S_AXI"
-        ]
-      },
-      "smartconnect_0_M00_AXI": {
-        "interface_ports": [
-          "microblaze_0_smartconnect/M00_AXI",
-          "microblaze_0_axi_mem/S00_AXI"
-        ]
-      },
-      "smartconnect_0_M01_AXI": {
-        "interface_ports": [
-          "microblaze_0_smartconnect/M01_AXI",
-          "microblaze_0_axi_periph/S00_AXI"
         ]
       },
       "microblaze_0_ilmb_1": {
@@ -409,10 +403,28 @@
           "microblaze_0_local_memory/ILMB"
         ]
       },
+      "smartconnect_0_M01_AXI": {
+        "interface_ports": [
+          "microblaze_0_smartconnect/M01_AXI",
+          "microblaze_0_axi_periph/S00_AXI"
+        ]
+      },
       "microblaze_0_dlmb_1": {
         "interface_ports": [
           "microblaze_0/DLMB",
           "microblaze_0_local_memory/DLMB"
+        ]
+      },
+      "microblaze_0_debug": {
+        "interface_ports": [
+          "mdm_1/MBDEBUG_0",
+          "microblaze_0/DEBUG"
+        ]
+      },
+      "microblaze_0_axi_mem_M00_AXI": {
+        "interface_ports": [
+          "microblaze_0_axi_mem/M00_AXI",
+          "mig_7series_0/S_AXI"
         ]
       },
       "microblaze_0_M_AXI_DP": {
@@ -420,14 +432,20 @@
           "microblaze_0_smartconnect/S00_AXI",
           "microblaze_0/M_AXI_DP"
         ]
+      },
+      "smartconnect_0_M00_AXI": {
+        "interface_ports": [
+          "microblaze_0_smartconnect/M00_AXI",
+          "microblaze_0_axi_mem/S00_AXI"
+        ]
       }
     },
     "nets": {
       "reset_1": {
         "ports": [
           "reset",
-          "mig_7series_0/sys_rst",
           "clk_wiz_0/resetn",
+          "mig_7series_0/sys_rst",
           "rst_mig_7series_0_83M/ext_reset_in"
         ]
       },
@@ -452,12 +470,12 @@
       "microblaze_0_Clk": {
         "ports": [
           "mig_7series_0/ui_clk",
-          "microblaze_0/Clk",
           "microblaze_0_local_memory/LMB_Clk",
+          "microblaze_0/Clk",
           "rst_mig_7series_0_83M/slowest_sync_clk",
           "microblaze_0_smartconnect/aclk",
-          "microblaze_0_axi_periph/aclk",
-          "microblaze_0_axi_mem/aclk"
+          "microblaze_0_axi_mem/aclk",
+          "microblaze_0_axi_periph/aclk"
         ]
       },
       "mig_7series_0_mmcm_locked": {
