@@ -29,22 +29,22 @@ Extended FPGA Options:
 Controller Options :
    Memory                        : DDR3_SDRAM
    Interface                     : AXI
-   Design Clock Frequency        : 3000 ps (  0.00 MHz)
+   Design Clock Frequency        : 3077 ps (  0.00 MHz)
    Phy to Controller Clock Ratio : 4:1
-   Input Clock Period            : 6000 ps
-   CLKFBOUT_MULT (PLL)           : 8
+   Input Clock Period            : 10000 ps
+   CLKFBOUT_MULT (PLL)           : 13
    DIVCLK_DIVIDE (PLL)           : 1
    VCC_AUX IO                    : 1.8V
    Memory Type                   : Components
-   Memory Part                   : MT41K128M16XX-125
-   Equivalent Part(s)            : --
+   Memory Part                   : MT41K128M16XX-15E
+   Equivalent Part(s)            : MT41K128M16HA-15E
    Data Width                    : 16
    ECC                           : Disabled
    Data Mask                     : enabled
    ORDERING                      : Normal
 
 AXI Parameters :
-   Data Width                    : 32
+   Data Width                    : 128
    Arbitration Scheme            : RD_PRI_REG
    Narrow Burst Support          : 0
    ID Width                      : 4

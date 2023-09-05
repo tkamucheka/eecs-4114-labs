@@ -93,6 +93,11 @@ module base_soc_mig_7series_0_0 (
   // user interface signals
   output            ui_clk,
   output            ui_clk_sync_rst,
+  output            ui_addn_clk_0,
+  output            ui_addn_clk_1,
+  output            ui_addn_clk_2,
+  output            ui_addn_clk_3,
+  output            ui_addn_clk_4,
   output            mmcm_locked,
   input         aresetn,
   output            app_sr_active,
@@ -111,8 +116,8 @@ module base_soc_mig_7series_0_0 (
   input         s_axi_awvalid,
   output            s_axi_awready,
   // Slave Interface Write Data Ports
-  input [31:0]         s_axi_wdata,
-  input [3:0]         s_axi_wstrb,
+  input [127:0]         s_axi_wdata,
+  input [15:0]         s_axi_wstrb,
   input         s_axi_wlast,
   input         s_axi_wvalid,
   output            s_axi_wready,
@@ -136,7 +141,7 @@ module base_soc_mig_7series_0_0 (
   // Slave Interface Read Data Ports
   input         s_axi_rready,
   output [3:0]          s_axi_rid,
-  output [31:0]            s_axi_rdata,
+  output [127:0]            s_axi_rdata,
   output [1:0]          s_axi_rresp,
   output            s_axi_rlast,
   output            s_axi_rvalid,
@@ -177,6 +182,11 @@ module base_soc_mig_7series_0_0 (
     // Application interface ports
     .ui_clk                         (ui_clk),
     .ui_clk_sync_rst                (ui_clk_sync_rst),
+    .ui_addn_clk_0                  (ui_addn_clk_0),
+    .ui_addn_clk_1                  (ui_addn_clk_1),
+    .ui_addn_clk_2                  (ui_addn_clk_2),
+    .ui_addn_clk_3                  (ui_addn_clk_3),
+    .ui_addn_clk_4                  (ui_addn_clk_4),
     .mmcm_locked                    (mmcm_locked),
     .aresetn                        (aresetn),
     .app_sr_active                  (app_sr_active),

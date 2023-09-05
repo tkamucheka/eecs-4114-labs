@@ -212,7 +212,7 @@
 						"WVALID": { "actual": "S00_AXI_wvalid"}
 					}
 				},
-				"/microblaze_0_smartconnect/M00_AXI": {
+				"/microblaze_0_smc/M00_AXI": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
@@ -260,7 +260,7 @@
 						"WVALID": { "actual": "M00_AXI_wvalid"}
 					}
 				},
-				"/microblaze_0_smartconnect/M01_AXI": {
+				"/microblaze_0_smc/M01_AXI": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},
@@ -307,7 +307,7 @@
 						"WVALID": { "actual": "M01_AXI_wvalid"}
 					}
 				},
-				"/microblaze_0_smartconnect/S00_AXI": {
+				"/microblaze_0_smc/S00_AXI": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "aclk"},

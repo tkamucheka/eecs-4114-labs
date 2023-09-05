@@ -92,6 +92,11 @@
     // Application interface ports
     .ui_clk                         (ui_clk),  // output			ui_clk
     .ui_clk_sync_rst                (ui_clk_sync_rst),  // output			ui_clk_sync_rst
+    .ui_addn_clk_0                  (ui_addn_clk_0),  // output			ui_addn_clk_0
+    .ui_addn_clk_1                  (ui_addn_clk_1),  // output			ui_addn_clk_1
+    .ui_addn_clk_2                  (ui_addn_clk_2),  // output			ui_addn_clk_2
+    .ui_addn_clk_3                  (ui_addn_clk_3),  // output			ui_addn_clk_3
+    .ui_addn_clk_4                  (ui_addn_clk_4),  // output			ui_addn_clk_4
     .mmcm_locked                    (mmcm_locked),  // output			mmcm_locked
     .aresetn                        (aresetn),  // input			aresetn
     .app_sr_active                  (app_sr_active),  // output			app_sr_active
@@ -110,8 +115,8 @@
     .s_axi_awvalid                  (s_axi_awvalid),  // input			s_axi_awvalid
     .s_axi_awready                  (s_axi_awready),  // output			s_axi_awready
     // Slave Interface Write Data Ports
-    .s_axi_wdata                    (s_axi_wdata),  // input [31:0]			s_axi_wdata
-    .s_axi_wstrb                    (s_axi_wstrb),  // input [3:0]			s_axi_wstrb
+    .s_axi_wdata                    (s_axi_wdata),  // input [127:0]			s_axi_wdata
+    .s_axi_wstrb                    (s_axi_wstrb),  // input [15:0]			s_axi_wstrb
     .s_axi_wlast                    (s_axi_wlast),  // input			s_axi_wlast
     .s_axi_wvalid                   (s_axi_wvalid),  // input			s_axi_wvalid
     .s_axi_wready                   (s_axi_wready),  // output			s_axi_wready
@@ -134,7 +139,7 @@
     .s_axi_arready                  (s_axi_arready),  // output			s_axi_arready
     // Slave Interface Read Data Ports
     .s_axi_rid                      (s_axi_rid),  // output [3:0]			s_axi_rid
-    .s_axi_rdata                    (s_axi_rdata),  // output [31:0]			s_axi_rdata
+    .s_axi_rdata                    (s_axi_rdata),  // output [127:0]			s_axi_rdata
     .s_axi_rresp                    (s_axi_rresp),  // output [1:0]			s_axi_rresp
     .s_axi_rlast                    (s_axi_rlast),  // output			s_axi_rlast
     .s_axi_rvalid                   (s_axi_rvalid),  // output			s_axi_rvalid

@@ -1,10 +1,10 @@
 // Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2019.1 (lin64) Build 2552052 Fri May 24 14:47:09 MDT 2019
-// Date        : Thu Aug 31 18:42:39 2023
+// Date        : Mon Sep  4 21:19:26 2023
 // Host        : Primus running 64-bit Ubuntu 23.04
-// Command     : write_verilog -force -mode funcsim -rename_top base_soc_clk_wiz_0_0 -prefix
-//               base_soc_clk_wiz_0_0_ base_soc_clk_wiz_0_0_sim_netlist.v
+// Command     : write_verilog -force -mode funcsim
+//               /mnt/Rogue/Projects/Vivado/eecs-4114-lab/base-soc/base-soc.srcs/sources_1/bd/base_soc/ip/base_soc_clk_wiz_0_0/base_soc_clk_wiz_0_0_sim_netlist.v
 // Design      : base_soc_clk_wiz_0_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -35,6 +35,7 @@ module base_soc_clk_wiz_0_0
         .resetn(resetn));
 endmodule
 
+(* ORIG_REF_NAME = "base_soc_clk_wiz_0_0_clk_wiz" *) 
 module base_soc_clk_wiz_0_0_base_soc_clk_wiz_0_0_clk_wiz
    (clk_out1,
     clk_out2,
@@ -101,11 +102,11 @@ module base_soc_clk_wiz_0_0_base_soc_clk_wiz_0_0_clk_wiz
     .CLKFBOUT_USE_FINE_PS("FALSE"),
     .CLKIN1_PERIOD(10.000000),
     .CLKIN2_PERIOD(0.000000),
-    .CLKOUT0_DIVIDE_F(5.000000),
+    .CLKOUT0_DIVIDE_F(6.000000),
     .CLKOUT0_DUTY_CYCLE(0.500000),
     .CLKOUT0_PHASE(0.000000),
     .CLKOUT0_USE_FINE_PS("FALSE"),
-    .CLKOUT1_DIVIDE(6),
+    .CLKOUT1_DIVIDE(10),
     .CLKOUT1_DUTY_CYCLE(0.500000),
     .CLKOUT1_PHASE(0.000000),
     .CLKOUT1_USE_FINE_PS("FALSE"),

@@ -37,13 +37,13 @@
 
   <Controller number="0">
     <MemoryDevice>DDR3_SDRAM/Components/MT41K128M16XX-15E</MemoryDevice>
-    <TimePeriod>3000</TimePeriod>
+    <TimePeriod>3077</TimePeriod>
     <VccAuxIO>1.8V</VccAuxIO>
     <PHYRatio>4:1</PHYRatio>
-    <InputClkFreq>166.666</InputClkFreq>
-    <UIExtraClocks>0</UIExtraClocks>
-    <MMCM_VCO>666</MMCM_VCO>
-    <MMCMClkOut0> 1.000</MMCMClkOut0>
+    <InputClkFreq>99.997</InputClkFreq>
+    <UIExtraClocks>1</UIExtraClocks>
+    <MMCM_VCO>649</MMCM_VCO>
+    <MMCMClkOut0> 3.250</MMCMClkOut0>
     <MMCMClkOut1>1</MMCMClkOut1>
     <MMCMClkOut2>1</MMCMClkOut2>
     <MMCMClkOut3>1</MMCMClkOut3>
@@ -54,8 +54,8 @@
     <ECC>Disabled</ECC>
     <Ordering>Normal</Ordering>
     <BankMachineCnt>4</BankMachineCnt>
-    <CustomPart>TRUE</CustomPart>
-    <NewPartName>MT41K128M16XX-125</NewPartName>
+    <CustomPart>FALSE</CustomPart>
+    <NewPartName></NewPartName>
     <RowAddress>14</RowAddress>
     <ColAddress>10</ColAddress>
     <BankAddress>3</BankAddress>
@@ -147,7 +147,7 @@
     <AXIParameters>
       <C0_C_RD_WR_ARB_ALGORITHM>RD_PRI_REG</C0_C_RD_WR_ARB_ALGORITHM>
       <C0_S_AXI_ADDR_WIDTH>28</C0_S_AXI_ADDR_WIDTH>
-      <C0_S_AXI_DATA_WIDTH>32</C0_S_AXI_DATA_WIDTH>
+      <C0_S_AXI_DATA_WIDTH>128</C0_S_AXI_DATA_WIDTH>
       <C0_S_AXI_ID_WIDTH>4</C0_S_AXI_ID_WIDTH>
       <C0_S_AXI_SUPPORTS_NARROW_BURST>0</C0_S_AXI_SUPPORTS_NARROW_BURST>
     </AXIParameters>
