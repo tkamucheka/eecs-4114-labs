@@ -2,45 +2,46 @@
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0.19  2019-03-26 bk=1.5019 VDI=41 GEI=35 GUI=JA:9.0 TLS
 #  -string -flagsOSRD
-preplace port ddr3_sdram -pg 1 -lvl 6 -x 1870 -y 330 -defaultsOSRD
-preplace port reset -pg 1 -lvl 0 -x 0 -y 340 -defaultsOSRD
-preplace port sys_clock -pg 1 -lvl 0 -x 0 -y 570 -defaultsOSRD
-preplace inst mig_7series_0 -pg 1 -lvl 5 -x 1710 -y 380 -defaultsOSRD
-preplace inst clk_wiz_0 -pg 1 -lvl 4 -x 1400 -y 560 -defaultsOSRD
-preplace inst microblaze_0 -pg 1 -lvl 2 -x 690 -y 250 -defaultsOSRD
-preplace inst microblaze_0_local_memory -pg 1 -lvl 3 -x 1100 -y 260 -defaultsOSRD
-preplace inst mdm_1 -pg 1 -lvl 1 -x 230 -y 180 -defaultsOSRD
-preplace inst rst_mig_7series_0_81M -pg 1 -lvl 1 -x 230 -y 360 -defaultsOSRD
-preplace inst microblaze_0_smc -pg 1 -lvl 3 -x 1100 -y 80 -defaultsOSRD
-preplace inst microblaze_0_mem -pg 1 -lvl 4 -x 1400 -y 270 -defaultsOSRD
-preplace inst microblaze_0_periph -pg 1 -lvl 4 -x 1400 -y 110 -defaultsOSRD
-preplace netloc reset_1 1 0 5 20 460 NJ 460 NJ 460 1250 360 NJ
-preplace netloc clk_wiz_0_clk_out1 1 4 1 1560 380n
-preplace netloc clk_wiz_0_clk_out2 1 4 1 1580 400n
-preplace netloc sys_clock_1 1 0 4 NJ 570 NJ 570 NJ 570 NJ
-preplace netloc microblaze_0_Clk 1 0 6 40 260 430 150 960 160 1250 190 N 190 1840
-preplace netloc mig_7series_0_mmcm_locked 1 0 6 50 480 NJ 480 NJ 480 NJ 480 1550J 490 1840
-preplace netloc rst_mig_7series_0_81M_mb_reset 1 1 1 450 280n
-preplace netloc rst_mig_7series_0_81M_bus_struct_reset 1 1 2 440 160 940J
-preplace netloc mdm_1_debug_sys_rst 1 0 2 30 250 410
-preplace netloc rst_mig_7series_0_81M_peripheral_aresetn 1 1 4 N 400 NJ 400 NJ 400 1570
-preplace netloc rst_mig_7series_0_81M_interconnect_aresetn 1 1 3 NJ 380 950 170 1260
-preplace netloc mig_7series_0_ui_clk_sync_rst 1 0 6 40 490 NJ 490 NJ 490 NJ 490 1540J 500 1850
-preplace netloc mig_7series_0_DDR3 1 5 1 NJ 330
-preplace netloc microblaze_0_dlmb_1 1 2 1 N 230
-preplace netloc microblaze_0_ilmb_1 1 2 1 N 250
-preplace netloc microblaze_0_debug 1 1 1 420 170n
-preplace netloc microblaze_0_M_AXI_DP 1 2 1 930 60n
-preplace netloc microblaze_0_mem_M00_AXI 1 4 1 1580 270n
-preplace netloc axi_smc_M00_AXI 1 3 1 1240 70n
-preplace netloc microblaze_0_smc_M01_AXI 1 3 1 N 90
-levelinfo -pg 1 0 230 690 1100 1400 1710 1870
-pagesize -pg 1 -db -bbox -sgen -120 0 2010 630
+preplace port ddr3_sdram -pg 1 -lvl 6 -x 1900 -y 440 -defaultsOSRD
+preplace port reset -pg 1 -lvl 0 -x 0 -y 660 -defaultsOSRD
+preplace port sys_clock -pg 1 -lvl 0 -x 0 -y 640 -defaultsOSRD
+preplace inst mig_7series_0 -pg 1 -lvl 5 -x 1740 -y 490 -defaultsOSRD
+preplace inst clk_wiz_0 -pg 1 -lvl 4 -x 1450 -y 630 -defaultsOSRD
+preplace inst microblaze_0 -pg 1 -lvl 2 -x 680 -y 530 -defaultsOSRD
+preplace inst microblaze_0_local_memory -pg 1 -lvl 3 -x 1120 -y 530 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 1 -x 240 -y 530 -defaultsOSRD
+preplace inst rst_mig_7series_0_81M -pg 1 -lvl 1 -x 240 -y 810 -defaultsOSRD
+preplace inst microblaze_0_axi_master -pg 1 -lvl 3 -x 1120 -y 270 -defaultsOSRD
+preplace inst microblaze_0_axi_mem -pg 1 -lvl 4 -x 1450 -y 120 -defaultsOSRD
+preplace inst microblaze_0_axi_periph -pg 1 -lvl 4 -x 1450 -y 340 -defaultsOSRD
+preplace netloc reset_1 1 0 5 20 630 NJ 630 NJ 630 1300 470 NJ
+preplace netloc clk_wiz_0_clk_out1 1 4 1 1600 490n
+preplace netloc clk_wiz_0_clk_out2 1 4 1 1610 510n
+preplace netloc sys_clock_1 1 0 4 NJ 640 NJ 640 NJ 640 NJ
+preplace netloc microblaze_0_Clk 1 0 6 50 650 430 620 950 440 1300 460 1600J 380 1870
+preplace netloc mig_7series_0_mmcm_locked 1 0 6 40 700 NJ 700 NJ 700 NJ 700 NJ 700 1870
+preplace netloc rst_mig_7series_0_81M_mb_reset 1 1 1 440 560n
+preplace netloc rst_mig_7series_0_81M_bus_struct_reset 1 1 2 NJ 790 960
+preplace netloc mdm_1_debug_sys_rst 1 0 2 30 600 420
+preplace netloc rst_mig_7series_0_81M_peripheral_aresetn 1 1 4 NJ 850 970 610 1290 530 NJ
+preplace netloc mig_7series_0_ui_clk_sync_rst 1 0 6 60 710 NJ 710 NJ 710 NJ 710 NJ 710 1880
+preplace netloc ARESETN_1 1 1 3 NJ 830 940 100 1280
+preplace netloc microblaze_0_debug 1 1 1 N 520
+preplace netloc mig_7series_0_DDR3 1 5 1 N 440
+preplace netloc microblaze_0_ilmb_1 1 2 1 N 520
+preplace netloc microblaze_0_dlmb_1 1 2 1 N 500
+preplace netloc microblaze_0_axi_master_M00_AXI 1 3 1 1270 60n
+preplace netloc microblaze_0_axi_master_M01_AXI 1 3 1 N 280
+preplace netloc microblaze_0_M_AXI_DP 1 2 1 920 160n
+preplace netloc microblaze_0_M_AXI_IP 1 2 1 930 180n
+preplace netloc microblaze_0_axi_mem_M00_AXI 1 4 1 1610 120n
+levelinfo -pg 1 0 240 680 1120 1450 1740 1900
+pagesize -pg 1 -db -bbox -sgen -120 0 2040 910
 "
 }
 {
    "da_axi4_cnt":"1",
-   "da_board_cnt":"4",
-   "da_clkrst_cnt":"1",
+   "da_board_cnt":"5",
+   "da_clkrst_cnt":"10",
    "da_mb_cnt":"1"
 }
