@@ -47,7 +47,6 @@ if { $bCheckIPs == 1 } {
 xilinx.com:ip:clk_wiz:6.0\
 xilinx.com:ip:mdm:3.2\
 xilinx.com:ip:microblaze:11.0\
-xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:mig_7series:4.2\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:lmb_bram_if_cntlr:4.0\
@@ -242,30 +241,32 @@ proc create_root_design { parentCell } {
    CONFIG.C_DEBUG_ENABLED {1} \
    CONFIG.C_D_AXI {1} \
    CONFIG.C_D_LMB {1} \
+   CONFIG.C_I_AXI {1} \
    CONFIG.C_I_LMB {1} \
+   CONFIG.G_USE_EXCEPTIONS {1} \
  ] $microblaze_0
+
+  # Create instance: microblaze_0_axi_master, and set properties
+  set microblaze_0_axi_master [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_master ]
+  set_property -dict [ list \
+   CONFIG.NUM_MI {2} \
+   CONFIG.NUM_SI {2} \
+ ] $microblaze_0_axi_master
+
+  # Create instance: microblaze_0_axi_mem, and set properties
+  set microblaze_0_axi_mem [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_mem ]
+  set_property -dict [ list \
+   CONFIG.NUM_MI {1} \
+ ] $microblaze_0_axi_mem
+
+  # Create instance: microblaze_0_axi_periph, and set properties
+  set microblaze_0_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_0_axi_periph ]
+  set_property -dict [ list \
+   CONFIG.NUM_MI {1} \
+ ] $microblaze_0_axi_periph
 
   # Create instance: microblaze_0_local_memory
   create_hier_cell_microblaze_0_local_memory [current_bd_instance .] microblaze_0_local_memory
-
-  # Create instance: microblaze_0_mem, and set properties
-  set microblaze_0_mem [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 microblaze_0_mem ]
-  set_property -dict [ list \
-   CONFIG.NUM_SI {1} \
- ] $microblaze_0_mem
-
-  # Create instance: microblaze_0_periph, and set properties
-  set microblaze_0_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 microblaze_0_periph ]
-  set_property -dict [ list \
-   CONFIG.NUM_SI {1} \
- ] $microblaze_0_periph
-
-  # Create instance: microblaze_0_smc, and set properties
-  set microblaze_0_smc [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 microblaze_0_smc ]
-  set_property -dict [ list \
-   CONFIG.NUM_MI {2} \
-   CONFIG.NUM_SI {1} \
- ] $microblaze_0_smc
 
   # Create instance: mig_7series_0, and set properties
   set mig_7series_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.2 mig_7series_0 ]
@@ -282,33 +283,35 @@ proc create_root_design { parentCell } {
  ] $rst_mig_7series_0_81M
 
   # Create interface connections
-  connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins microblaze_0_mem/S00_AXI] [get_bd_intf_pins microblaze_0_smc/M00_AXI]
-  connect_bd_intf_net -intf_net microblaze_0_M_AXI_DP [get_bd_intf_pins microblaze_0/M_AXI_DP] [get_bd_intf_pins microblaze_0_smc/S00_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_M_AXI_DP [get_bd_intf_pins microblaze_0/M_AXI_DP] [get_bd_intf_pins microblaze_0_axi_master/S00_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_M_AXI_IP [get_bd_intf_pins microblaze_0/M_AXI_IP] [get_bd_intf_pins microblaze_0_axi_master/S01_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_master_M00_AXI [get_bd_intf_pins microblaze_0_axi_master/M00_AXI] [get_bd_intf_pins microblaze_0_axi_mem/S00_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_master_M01_AXI [get_bd_intf_pins microblaze_0_axi_master/M01_AXI] [get_bd_intf_pins microblaze_0_axi_periph/S00_AXI]
+  connect_bd_intf_net -intf_net microblaze_0_axi_mem_M00_AXI [get_bd_intf_pins microblaze_0_axi_mem/M00_AXI] [get_bd_intf_pins mig_7series_0/S_AXI]
   connect_bd_intf_net -intf_net microblaze_0_debug [get_bd_intf_pins mdm_1/MBDEBUG_0] [get_bd_intf_pins microblaze_0/DEBUG]
   connect_bd_intf_net -intf_net microblaze_0_dlmb_1 [get_bd_intf_pins microblaze_0/DLMB] [get_bd_intf_pins microblaze_0_local_memory/DLMB]
   connect_bd_intf_net -intf_net microblaze_0_ilmb_1 [get_bd_intf_pins microblaze_0/ILMB] [get_bd_intf_pins microblaze_0_local_memory/ILMB]
-  connect_bd_intf_net -intf_net microblaze_0_mem_M00_AXI [get_bd_intf_pins microblaze_0_mem/M00_AXI] [get_bd_intf_pins mig_7series_0/S_AXI]
-  connect_bd_intf_net -intf_net microblaze_0_smc_M01_AXI [get_bd_intf_pins microblaze_0_periph/S00_AXI] [get_bd_intf_pins microblaze_0_smc/M01_AXI]
   connect_bd_intf_net -intf_net mig_7series_0_DDR3 [get_bd_intf_ports ddr3_sdram] [get_bd_intf_pins mig_7series_0/DDR3]
 
   # Create port connections
+  connect_bd_net -net ARESETN_1 [get_bd_pins microblaze_0_axi_master/ARESETN] [get_bd_pins microblaze_0_axi_mem/ARESETN] [get_bd_pins microblaze_0_axi_periph/ARESETN] [get_bd_pins rst_mig_7series_0_81M/interconnect_aresetn]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_pins clk_wiz_0/clk_out1] [get_bd_pins mig_7series_0/clk_ref_i]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_pins clk_wiz_0/clk_out2] [get_bd_pins mig_7series_0/sys_clk_i]
   connect_bd_net -net mdm_1_debug_sys_rst [get_bd_pins mdm_1/Debug_SYS_Rst] [get_bd_pins rst_mig_7series_0_81M/mb_debug_sys_rst]
-  connect_bd_net -net microblaze_0_Clk [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins microblaze_0_mem/aclk] [get_bd_pins microblaze_0_periph/aclk] [get_bd_pins microblaze_0_smc/aclk] [get_bd_pins mig_7series_0/ui_clk] [get_bd_pins rst_mig_7series_0_81M/slowest_sync_clk]
+  connect_bd_net -net microblaze_0_Clk [get_bd_pins microblaze_0/Clk] [get_bd_pins microblaze_0_axi_master/ACLK] [get_bd_pins microblaze_0_axi_master/M00_ACLK] [get_bd_pins microblaze_0_axi_master/M01_ACLK] [get_bd_pins microblaze_0_axi_master/S00_ACLK] [get_bd_pins microblaze_0_axi_master/S01_ACLK] [get_bd_pins microblaze_0_axi_mem/ACLK] [get_bd_pins microblaze_0_axi_mem/M00_ACLK] [get_bd_pins microblaze_0_axi_mem/S00_ACLK] [get_bd_pins microblaze_0_axi_periph/ACLK] [get_bd_pins microblaze_0_axi_periph/M00_ACLK] [get_bd_pins microblaze_0_axi_periph/S00_ACLK] [get_bd_pins microblaze_0_local_memory/LMB_Clk] [get_bd_pins mig_7series_0/ui_clk] [get_bd_pins rst_mig_7series_0_81M/slowest_sync_clk]
   connect_bd_net -net mig_7series_0_mmcm_locked [get_bd_pins mig_7series_0/mmcm_locked] [get_bd_pins rst_mig_7series_0_81M/dcm_locked]
   connect_bd_net -net mig_7series_0_ui_clk_sync_rst [get_bd_pins mig_7series_0/ui_clk_sync_rst] [get_bd_pins rst_mig_7series_0_81M/aux_reset_in]
   connect_bd_net -net reset_1 [get_bd_ports reset] [get_bd_pins clk_wiz_0/resetn] [get_bd_pins mig_7series_0/sys_rst] [get_bd_pins rst_mig_7series_0_81M/ext_reset_in]
   connect_bd_net -net rst_mig_7series_0_81M_bus_struct_reset [get_bd_pins microblaze_0_local_memory/SYS_Rst] [get_bd_pins rst_mig_7series_0_81M/bus_struct_reset]
-  connect_bd_net -net rst_mig_7series_0_81M_interconnect_aresetn [get_bd_pins microblaze_0_mem/aresetn] [get_bd_pins microblaze_0_periph/aresetn] [get_bd_pins microblaze_0_smc/aresetn] [get_bd_pins rst_mig_7series_0_81M/interconnect_aresetn]
   connect_bd_net -net rst_mig_7series_0_81M_mb_reset [get_bd_pins microblaze_0/Reset] [get_bd_pins rst_mig_7series_0_81M/mb_reset]
-  connect_bd_net -net rst_mig_7series_0_81M_peripheral_aresetn [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_mig_7series_0_81M/peripheral_aresetn]
+  connect_bd_net -net rst_mig_7series_0_81M_peripheral_aresetn [get_bd_pins microblaze_0_axi_master/M00_ARESETN] [get_bd_pins microblaze_0_axi_master/M01_ARESETN] [get_bd_pins microblaze_0_axi_master/S00_ARESETN] [get_bd_pins microblaze_0_axi_master/S01_ARESETN] [get_bd_pins microblaze_0_axi_mem/M00_ARESETN] [get_bd_pins microblaze_0_axi_mem/S00_ARESETN] [get_bd_pins microblaze_0_axi_periph/M00_ARESETN] [get_bd_pins microblaze_0_axi_periph/S00_ARESETN] [get_bd_pins mig_7series_0/aresetn] [get_bd_pins rst_mig_7series_0_81M/peripheral_aresetn]
   connect_bd_net -net sys_clock_1 [get_bd_ports sys_clock] [get_bd_pins clk_wiz_0/clk_in1]
 
   # Create address segments
   create_bd_addr_seg -range 0x00020000 -offset 0x00000000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs microblaze_0_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG_dlmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x00020000 -offset 0x00000000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs microblaze_0_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG_ilmb_bram_if_cntlr_Mem
   create_bd_addr_seg -range 0x10000000 -offset 0x80000000 [get_bd_addr_spaces microblaze_0/Data] [get_bd_addr_segs mig_7series_0/memmap/memaddr] SEG_mig_7series_0_memaddr
+  create_bd_addr_seg -range 0x10000000 -offset 0x80000000 [get_bd_addr_spaces microblaze_0/Instruction] [get_bd_addr_segs mig_7series_0/memmap/memaddr] SEG_mig_7series_0_memaddr
 
 
   # Restore current instance
