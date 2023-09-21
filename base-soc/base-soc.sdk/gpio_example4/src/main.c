@@ -1,8 +1,11 @@
 /*
  * main.c
  *
+ * Title:       GPIO Example 4
+ * Description: High level GPIO example for the Arty board using
+ *              xparamers.h, xgpio_l.h, and XGpio_* functions.
  *  Created on: Sep 19, 2023
- *      Author: tendayi
+ *      Author: Tendayi Kamucheka
  */
 
 #include <xparameters.h>
@@ -37,17 +40,20 @@ int main(void)
   // volatile unsigned *dipSWTri = (unsigned *)(XPAR_AXI_GPIO_1_BASEADDR + XGPIO_TRI2_OFFSET);
 
   // Set tri-state registers for LEDs and switches
-  // *rgbLEDTri = 0x0;
-  // *dipSWTri = 0xF;
-  XGpio_WriteReg(XPAR_AXI_GPIO_1_BASEADDR, XGPIO_TRI_OFFSET, 0x0);
-  XGpio_WriteReg(XPAR_AXI_GPIO_1_BASEADDR, XGPIO_TRI2_OFFSET, 0xF);
+  // *rgbLEDTri = 0x0; // Output
+  // *dipSWTri = 0xF;  // Input
+  XGpio_WriteReg(XPAR_AXI_GPIO_1_BASEADDR, XGPIO_TRI_OFFSET, 0x0);  // Output
+  XGpio_WriteReg(XPAR_AXI_GPIO_1_BASEADDR, XGPIO_TRI2_OFFSET, 0xF); // Input
 
-  // Loop forever
+  // Initialize LED & DIP switches state variable
   unsigned led_state = 0;
   unsigned sw_state = 0;
+
+  // Loop forever
   while (1)
   {
     // Reset LED state
+    // Generally assumes all switches are off
     led_state = 0;
 
     // Read switches
@@ -59,7 +65,7 @@ int main(void)
     if (sw_state & SW2_MASK) led_state |= LD(2);
     if (sw_state & SW3_MASK) led_state |= LD(3);
 
-    // Write LED state
+    // Update LED state
     // *rgbLEDData = led_state;
     XGpio_WriteReg(XPAR_AXI_GPIO_1_BASEADDR, XGPIO_DATA_OFFSET, led_state);
   }

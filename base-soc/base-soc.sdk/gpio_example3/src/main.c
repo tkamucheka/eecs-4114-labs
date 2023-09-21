@@ -1,8 +1,11 @@
 /*
  * main.c
  *
+ * Title:       GPIO Example 3
+ * Description: Low level GPIO example for the Arty board using
+ *              xparamers.h and xgpio_l.h
  *  Created on: Sep 19, 2023
- *      Author: tendayi
+ *      Author: Tendayi Kamucheka
  */
 
 #include <xparameters.h>
@@ -37,14 +40,17 @@ int main(void)
   volatile unsigned *dipSWTri = (unsigned *)(XPAR_AXI_GPIO_1_BASEADDR + XGPIO_TRI2_OFFSET);
 
   // Set tri-state registers for LEDs and switches
-  *rgbLEDTri = 0x0;
-  *dipSWTri = 0xF;
+  *rgbLEDTri = 0x0; // Output
+  *dipSWTri = 0xF;  // Input
+
+  // Initialize LED state variable
+  unsigned led_state = 0;
 
   // Loop forever
-  unsigned led_state = 0;
   while (1)
   {
-    // Reset LED state
+    // Reset LED state variable
+    // Generally assumes all switches are off
     led_state = 0;
 
     // Check dip switches
@@ -53,7 +59,7 @@ int main(void)
     if (*dipSWData & SW2_MASK) led_state |= LD(2);
     if (*dipSWData & SW3_MASK) led_state |= LD(3);
 
-    // Write LED state
+    // Update LED state
     *rgbLEDData = led_state;
   }
 

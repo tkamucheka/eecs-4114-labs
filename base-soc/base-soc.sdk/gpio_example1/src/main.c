@@ -1,12 +1,14 @@
 /*
  * main.c
  *
+ * Title:       GPIO Example 1
+ * Description: Low level GPIO example for the Arty board.
  *  Created on: Sep 19, 2023
- *      Author: tendayi
+ *      Author: Tendayi Kamucheka
  */
 
 // GPIO base addresses
-#define AXI_GPIO_1_BASE_ADDR 0x40010000
+#define AXI_GPIO_1_BASEADDR 0x40010000
 
 // RGB color values
 #define RGB_WHITE 0x7
@@ -26,22 +28,25 @@
 int main(void)
 {
   // Initialize RGB LED GPIO
-  volatile unsigned *rgbLEDData = (unsigned *)(AXI_GPIO_1_BASE_ADDR);
-  volatile unsigned *rgbLEDTri = (unsigned *)(AXI_GPIO_1_BASE_ADDR + 4);
+  volatile unsigned *rgbLEDData = (unsigned *)(AXI_GPIO_1_BASEADDR);
+  volatile unsigned *rgbLEDTri = (unsigned *)(AXI_GPIO_1_BASEADDR + 4);
 
   // Initialize dip switch GPIO
-  volatile unsigned *dipSWData = (unsigned *)(AXI_GPIO_1_BASE_ADDR + 8);
-  volatile unsigned *dipSWTri = (unsigned *)(AXI_GPIO_1_BASE_ADDR + 12);
+  volatile unsigned *dipSWData = (unsigned *)(AXI_GPIO_1_BASEADDR + 8);
+  volatile unsigned *dipSWTri = (unsigned *)(AXI_GPIO_1_BASEADDR + 12);
 
   // Set tri-state registers for LEDs and switches
-  *rgbLEDTri = 0x0;
-  *dipSWTri = 0xF;
+  *rgbLEDTri = 0x0; // Output
+  *dipSWTri = 0xF;  // Input
 
-  // Loop forever
+  // Initialize LED state variable
   unsigned led_state = 0;
+  
+  // Loop forever
   while (1)
   {
-    // Reset LED state
+    // Reset LED state variable
+    // Generally assumes all switches are off
     led_state = 0;
 
     // Check dip switches
@@ -50,7 +55,7 @@ int main(void)
     if (*dipSWData & SW2_MASK) led_state |= LD(2);
     if (*dipSWData & SW3_MASK) led_state |= LD(3);
 
-    // Write LED state
+    // Update LED state
     *rgbLEDData = led_state;
   }
 

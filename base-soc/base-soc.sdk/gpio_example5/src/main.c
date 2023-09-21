@@ -1,8 +1,11 @@
 /*
  * main.c
  *
+ * Title:       GPIO Example 2
+ * Description: High level GPIO example for the Arty board using
+ *              XGpio object instance and XGpio_ functions. 
  *  Created on: Sep 19, 2023
- *      Author: tendayi
+ *      Author: Tendayi Kamucheka
  */
 
 #include <xparameters.h>
@@ -45,12 +48,15 @@ int main(void)
   XGpio_SetDataDirection(&gpio_1, RGB_CHANNEL, (u32)0x0);
   XGpio_SetDataDirection(&gpio_1, SW_CHANNEL, (u32)0xF);
 
-  // Loop forever
+  // Initialize LED & DIP switches state variable
   u32 led_state = 0;
   u32 sw_state = 0;
+
+  // Loop forever
   while (1)
   {
     // Reset LED state
+    // Generally assumes all switches are off
     led_state = 0;
 
     // Read switches
@@ -63,7 +69,7 @@ int main(void)
     if (sw_state & SW2_MASK) led_state |= LD(2);
     if (sw_state & SW3_MASK) led_state |= LD(3);
 
-    // Write LED state
+    // Update LED state
     // XGpio_WriteReg(XPAR_AXI_GPIO_1_BASEADDR, XGPIO_DATA_OFFSET, led_state);
     XGpio_DiscreteWrite(&gpio_1, RGB_CHANNEL, led_state);
   }
